@@ -1,4 +1,5 @@
-import { Outlet, Navigate, Route, Routes, useLocation, replace } from "react-router-dom";
+import { Outlet, Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { Home, Login, Profile, Register, ResetPassword } from "./pages";
 
 function Layout () {
   const user = null;

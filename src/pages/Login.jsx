@@ -1,8 +1,17 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import { TbSocial } from "react-icons/tb"
 import { TextInput } from "../components"
+import { useForm } from "react-hook-form"
 
 const Login = () => {
+    const  {
+        register,
+        handleSubmit,
+        formState: {errors},
+    } = useForm({
+        mode: "onChange",
+    })
   return (
     <div className='bg-bgColor w-full h-[100vh] flex items-center justify-center p-6'>
         <div className='w-full md:2-2/3 h-fit lg:h-full 2xl:h-5/6 py-8 lg:py-0 flex bg-primary rounded-xl overflow-hidden shadow-xl'>
@@ -20,8 +29,39 @@ const Login = () => {
                     Welcome back!
                 </span>
                 <form className="py-8 flex flex-col gap-5">
-                    <TextInput />
+                    <TextInput 
+                    name="email"
+                    placeholder="example@test.com"
+                    label="Email Address"
+                    type="email"
+                    register={
+                        register("email", {
+                            required: "Email address is required"
+                        })}
+                        styles="w-full rounded-full"
+                        labelStyle="ml-2"
+                        error= {errors.email ? errors.email.message : "" }
+                    />
+                    <TextInput 
+                    name="password"
+                    placeholder="[PASSWORD]"
+                    label="Password"
+                    type="password"
+                    register={
+                        register("password", {
+                            required: "Password address is required"
+                        })}
+                        styles="w-full rounded-full"
+                        labelStyle="ml-2"
+                        error= {errors.email ? errors.email.message : "" }
+                    />
                 </form>
+
+                <Link
+                to="/reset-password"
+                className="text-sm text-right text-blue font-semibold"
+                >
+                    Forgot Password</Link>
             </div>
             {/* RIGHT */}
             <div></div>

@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import { TbSocial } from "react-icons/tb"
-import { TextInput } from "../components"
+import { CustomButton, Loading, TextInput } from "../components"
 import { useForm } from "react-hook-form"
+import { useDispatch } from "react-redux"
 
 const Login = () => {
     const  {
@@ -12,6 +13,9 @@ const Login = () => {
     } = useForm({
         mode: "onChange",
     })
+    const [errMsg, setErrMsg] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const dispatch = useDispatch();
   return (
     <div className='bg-bgColor w-full h-[100vh] flex items-center justify-center p-6'>
         <div className='w-full md:w-2/3 h-fit lg:h-full 2xl:h-5/6 py-8 lg:py-0 flex bg-primary rounded-xl overflow-hidden shadow-xl'>
@@ -61,7 +65,25 @@ const Login = () => {
                 to="/reset-password"
                 className="text-sm text-right text-blue font-semibold"
                 >
-                    Forgot Password</Link>
+                    Forgot Password
+                    </Link>
+
+                    {errMsg?.message && (
+                        <span
+                            role='alert'
+                            className={`text-sm ${
+                            errMsg?.status === "failed"
+                                ? "text-[#f64949fe]"
+                                : "text-[#2ba150fe]"
+                            } mt-0.5`}
+                        >
+                            {errMsg?.message}
+                        </span>
+                    )}
+
+                    {
+                        isSubmitting ? <Loading /> : <CustomButton />
+                    }
             </div>
             {/* RIGHT */}
             <div></div>

@@ -92,11 +92,11 @@ const Login = () => {
                     type="password"
                     register={
                         register("password", {
-                            required: "Password address is required"
+                            required: "Password is required"
                         })}
                         styles="w-full rounded-full"
                         labelStyle="ml-2"
-                        error= {errors.email ? errors.email.message : "" }
+                        error= {errors.email ? errors.password.message : "" }
                     />
 
                     <Link

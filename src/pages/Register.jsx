@@ -83,12 +83,13 @@ const Register = () => {
               />
 
               <TextInput
+                name='Last Name'
                 label='Last Name'
                 placeholder='Last Name'
                 type='lastName'
                 styles='w-full'
                 register={register("lastName", {
-                  required: "Last Name do no match",
+                  required: "Last Name is required!",
                 })}
                 error={errors.lastName ? errors.lastName?.message : ""}
               />
@@ -99,10 +100,10 @@ const Register = () => {
               label='Email Address'
               placeholder='email@example.com'
               type='email'
+              styles='w-full'
               register={register("email", {
                 required: "Email Address is required!",
               })}
-              styles='w-full'
               error={errors.email ? errors.email.message : ""}
             />
 
@@ -120,6 +121,7 @@ const Register = () => {
               />
 
               <TextInput
+                name='confirm password'
                 label='Confirm Password'
                 placeholder='Password'
                 type='password'
@@ -129,7 +131,7 @@ const Register = () => {
                     const { password } = getValues();
 
                     if (password != value) {
-                      return "Passwords do no match";
+                      return "Passwords do not match";
                     }
                   },
                 })}

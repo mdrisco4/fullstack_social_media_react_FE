@@ -13,6 +13,8 @@ const Login = () => {
                     </div>
                     <span className="text-2xl text-[#065ad8]">Tester</span>
                 </div>
+
+                <p className="text-ascent-1 text-base font-semihold"> Log in to your account</p>
             </div>
             {/* RIGHT */}
             <div></div>

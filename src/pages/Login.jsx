@@ -1,6 +1,6 @@
 import React from "react"
 import { TbSocial } from "react-icons/tb"
-import TextInput from "../components/TextInput"
+import { TextInput } from "../components"
 
 const Login = () => {
   return (

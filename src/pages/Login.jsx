@@ -1,5 +1,6 @@
 import React from "react"
 import { TbSocial } from "react-icons/tb"
+import TextInput from "../components/TextInput"
 
 const Login = () => {
   return (
@@ -15,6 +16,12 @@ const Login = () => {
                 </div>
 
                 <p className="text-ascent-1 text-base font-semihold"> Log in to your account</p>
+                <span className="text-sm mt-2 text-ascent-2">
+                    Welcome back!
+                </span>
+                <form className="py-8 flex flex-col gap-5">
+                    <TextInput />
+                </form>
             </div>
             {/* RIGHT */}
             <div></div>

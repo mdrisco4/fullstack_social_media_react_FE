@@ -3,9 +3,9 @@ import { Home, Login, Profile, Register, ResetPassword } from "./pages";
 import { useSelector } from "react-redux";
 
 function Layout () {
-  const user = useSelector;
-  const location = useLocation(state=> state.user);
-  // console.log(user);
+  const { user } = useSelector((state) => state.user);
+  const location = useLocation()
+  console.log(user);
   return user?.token ? (
     <Outlet />
   ) : (
@@ -14,7 +14,7 @@ function Layout () {
 }
 function App() {
   const { theme } = useSelector((state) => state.theme);
-  console.log(theme);
+  // console.log(theme);
   return (
     <div data-theme={theme} className='w-full min-h-[100vh]'>
       <Routes>

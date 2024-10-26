@@ -1,6 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { json } from "react-router-dom";
-import { dispatch } from "./store";
 
 const initialState = {
     theme: JSON.parse(window?.localStorage.getItem("theme")) ?? "dark",

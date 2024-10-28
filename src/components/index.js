@@ -3,6 +3,7 @@ import CustomButton from "./CustomButton"
 import Loading from "./Loading"
 import TopBar from "./TopBar";
 import ProfileCard from "./ProfileCard";
+import FriendsCard from "./FriendsCard";
 
 export {
     TextInput,
@@ -10,4 +11,5 @@ export {
     Loading,
     TopBar,
     ProfileCard,
+    FriendsCard
 };

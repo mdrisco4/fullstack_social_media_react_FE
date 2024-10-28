@@ -58,7 +58,7 @@ const Register = () => {
               <TbSocial />
             </div>
             <span className='text-2xl text-[#065ad8] font-semibold'>
-              ShareFun
+              Driz Biz
             </span>
           </div>
           <p className='text-ascent-1 text-base font-semibold'>
@@ -83,13 +83,12 @@ const Register = () => {
               />
 
               <TextInput
-                name='Last Name'
                 label='Last Name'
                 placeholder='Last Name'
                 type='lastName'
                 styles='w-full'
                 register={register("lastName", {
-                  required: "Last Name is required!",
+                  required: "Last Name do no match",
                 })}
                 error={errors.lastName ? errors.lastName?.message : ""}
               />
@@ -100,10 +99,10 @@ const Register = () => {
               label='Email Address'
               placeholder='email@example.com'
               type='email'
-              styles='w-full'
               register={register("email", {
                 required: "Email Address is required!",
               })}
+              styles='w-full'
               error={errors.email ? errors.email.message : ""}
             />
 
@@ -121,7 +120,6 @@ const Register = () => {
               />
 
               <TextInput
-                name='confirm password'
                 label='Confirm Password'
                 placeholder='Password'
                 type='password'
@@ -131,7 +129,7 @@ const Register = () => {
                     const { password } = getValues();
 
                     if (password != value) {
-                      return "Passwords do not match";
+                      return "Passwords do no match";
                     }
                   },
                 })}

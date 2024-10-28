@@ -43,8 +43,7 @@ const ProfileCard = ({ user }) => {
               <LiaEditSolid
                 size={22}
                 className="text-blue curson-pointer"
-                onClick={() => {}}
-                // () => dispatch(updateProfile(true))
+                onClick={() => dispatch(updateProfile(true))}
               />
             ) : (
               <button

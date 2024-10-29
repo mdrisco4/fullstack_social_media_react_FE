@@ -4,11 +4,26 @@ import { ProfileCard, TopBar, FriendsCard, CustomButton } from "../components";
 import { friends, requests } from "../assets/data";
 import { Link } from "react-router-dom";
 import { NoProfile } from "../assets";
+import { apiRequest } from "../utils";
 
 const Home = () => {
   const { user } = useSelector((state) => state.user);
   const [friendRequest, setFriendRequest] = useState(requests);
   const [suggestedFriends, setSuggestedFriends] = useState(friendRequest);
+
+  const acceptFriendRequest = async (id, status) => {
+    try {
+      const res = await apiRequest({
+        url: "/users/accept-request",
+        token: user?.token,
+        method: "POST",
+        data: { rid: id, status },
+      });
+      setFriendRequest(res?.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="home w-full px-0 lg:px-10 pb-20 2xl:px-40 bg-bgColor lg:rounded-lg h-screen overflow-hidden">
@@ -56,16 +71,16 @@ const Home = () => {
                   </Link>
 
                   <div className="flex gap-1">
-                    {/* <CustomButton
+                    <CustomButton
+                      title="Confirm"
                       onClick={() => acceptFriendRequest(_id, "Accepted")}
-                      title="Accept"
                       containerStyles="bg-[#0444a4] text-xs text-white px-1.5 py-1 rounded-full"
                     />
                     <CustomButton
-                      title="Deny"
+                      title="Reject"
                       onClick={() => acceptFriendRequest(_id, "Denied")}
                       containerStyles="border border-[#666] text-xs text-ascent-1 px-1.5 py-1 rounded-full"
-                    /> */}
+                    />
                   </div>
                 </div>
               ))}

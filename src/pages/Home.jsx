@@ -11,20 +11,25 @@ import { friends, requests, suggestions } from "../assets/data";
 import { Link } from "react-router-dom";
 import { NoProfile } from "../assets";
 import { apiRequest } from "../utils";
-import { BsPersonFillAdd } from "react-icons/bs";
+import { BsFiletypeGif, BsPersonFillAdd } from "react-icons/bs";
+import { BiImages, BiSolidVideo } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 
 const Home = () => {
   const { user } = useSelector((state) => state.user);
   const [friendRequest, setFriendRequest] = useState(requests);
   const [suggestedFriends, setSuggestedFriends] = useState(suggestions);
+  
+  const [errMsg, setErrMsg] = useState();
+  const [file, setFile] = useState(null);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const handlePostSubmit = async (data) => {};
-  const [errMsg, setErrMsg] = useState();
+
+  const onSubmitPost = async (data) => {};
 
   const acceptFriendRequest = async (id, status) => {
     try {
@@ -52,7 +57,7 @@ const Home = () => {
         {/* CENTER */}
         <div className="flex-1 h-full bg-primary px-4 flex flex-col gap-6 overflow-y-auto rounded-lg">
           <form
-            onSubmit={handlePostSubmit()}
+            onSubmit={handleSubmit()}
             className="bg-primary px-4 rounded-lg"
           >
             <div className="w-full flex items-center gap-2 py-4 border-b border-[#66666645]">
@@ -83,6 +88,53 @@ const Home = () => {
                 {errMsg?.message}
               </span>
             )}
+            <div className="items-center jutify-between py-4">
+                <label
+                    htmlFor="imgUpload"
+                    className="flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer"
+                >
+                    <input 
+                        type="file"
+                        onChange={(e) => setFile(e.target.files[0])}
+                        className="hidden"
+                        id="imgUpload"
+                        data-max-size="5120"
+                        accept=".jpg, .png, .jpeg"
+                    />
+                    <BiImages />
+                    <span>Image</span>                  
+                </label>
+                <label
+                    htmlFor="videoUpload"
+                    className="flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer"
+                >
+                    <input 
+                        type="file"
+                        onChange={(e) => setFile(e.target.files[0])}
+                        className="hidden"
+                        id="videoUpload"
+                        data-max-size="5120"
+                        accept=".mp4, .wav"
+                    />
+                    <BiSolidVideo />
+                    <span>Video</span>                 
+                </label>
+                <label
+                    htmlFor="vgifUpload"
+                    className="flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer"
+                >
+                    <input 
+                        type="file"
+                        onChange={(e) => setFile(e.target.files[0])}
+                        className="hidden"
+                        id="vgifUpload"
+                        data-max-size="5120"
+                        accept=".gif"
+                    />
+                    <BsFiletypeGif /> 
+                    <span>Gif</span>                   
+                </label>
+            </div>
           </form>
         </div>
         {/* RIGHT */}

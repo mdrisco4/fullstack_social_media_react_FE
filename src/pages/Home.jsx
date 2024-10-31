@@ -1,16 +1,30 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { ProfileCard, TopBar, FriendsCard, CustomButton } from "../components";
+import {
+  ProfileCard,
+  TopBar,
+  FriendsCard,
+  CustomButton,
+  TextInput,
+} from "../components";
 import { friends, requests, suggestions } from "../assets/data";
 import { Link } from "react-router-dom";
 import { NoProfile } from "../assets";
 import { apiRequest } from "../utils";
 import { BsPersonFillAdd } from "react-icons/bs";
+import { useForm } from "react-hook-form";
 
 const Home = () => {
   const { user } = useSelector((state) => state.user);
   const [friendRequest, setFriendRequest] = useState(requests);
   const [suggestedFriends, setSuggestedFriends] = useState(suggestions);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const handlePostSubmit = async (data) => {};
+  const [errMsg, setErrMsg] = useState();
 
   const acceptFriendRequest = async (id, status) => {
     try {
@@ -36,7 +50,41 @@ const Home = () => {
           <FriendsCard friends={user?.friends} />
         </div>
         {/* CENTER */}
-        <div className="flex-1 h-full bg-primary px-4 flex flex-col gap-6 overflow-y-auto"></div>
+        <div className="flex-1 h-full bg-primary px-4 flex flex-col gap-6 overflow-y-auto rounded-lg">
+          <form
+            onSubmit={handlePostSubmit()}
+            className="bg-primary px-4 rounded-lg"
+          >
+            <div className="w-full flex items-center gap-2 py-4 border-b border-[#66666645]">
+              <img
+                src={user?.profileUrl ?? NoProfile}
+                alt="User Image"
+                className="w-14 h-14 rounded-full object-cover"
+              />
+              <TextInput
+                styles="w-full rounded-full py-5"
+                placeholder="What do you want to post?"
+                name="description"
+                register={register("description", {
+                  required: "Write something to post",
+                })}
+                error={errors.description ? errors.description.message : ""}
+              />
+            </div>
+            {errMsg?.message && (
+              <span
+                role="alert"
+                className={`text-sm ${
+                  errMsg?.status === "failed"
+                    ? "text-[#f64949fe]"
+                    : "text=[#2ba150fe]"
+                } mt-0.5`}
+              >
+                {errMsg?.message}
+              </span>
+            )}
+          </form>
+        </div>
         {/* RIGHT */}
         <div className="hidden w-1/4 h-full lg:flex flex-col gap-8 overflow-y-auto">
           {/* FRIEND REQUESTS */}
@@ -120,7 +168,7 @@ const Home = () => {
                   <div className="flex gap-1">
                     <button
                       className="bg-[#0444a430] text-sm text-white p-1 rounded"
-                    //   onClick={() => handleFriendRequest(friend?._id)}
+                      //   onClick={() => handleFriendRequest(friend?._id)}
                     >
                       <BsPersonFillAdd size={20} className="text-[#0f52b6]" />
                     </button>

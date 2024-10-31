@@ -7,7 +7,7 @@ import {
   CustomButton,
   TextInput,
   Loading,
-  PostCard
+  PostCard,
 } from "../components";
 import { friends, requests, suggestions, posts } from "../assets/data";
 import { Link } from "react-router-dom";
@@ -17,11 +17,13 @@ import { BsFiletypeGif, BsPersonFillAdd, BsPostcard } from "react-icons/bs";
 import { BiImages, BiSolidVideo } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 
+// console.log(posts)
+
 const Home = () => {
   const { user } = useSelector((state) => state.user);
   const [friendRequest, setFriendRequest] = useState(requests);
   const [suggestedFriends, setSuggestedFriends] = useState(suggestions);
-  
+
   const [errMsg, setErrMsg] = useState("");
   const [file, setFile] = useState(null);
   const [posting, setPosting] = useState(false);
@@ -49,13 +51,9 @@ const Home = () => {
     }
   };
 
-  const handleDelete = async () => {
+  const handleDelete = async () => {};
 
-  }
-
-  const handleLikePost = async () => {
-    
-  }
+  const handleLikePost = async () => {};
 
   return (
     <div className="home w-full px-0 lg:px-10 pb-20 2xl:px-40 bg-bgColor lg:rounded-lg h-screen overflow-hidden">
@@ -101,79 +99,82 @@ const Home = () => {
               </span>
             )}
             <div className="flex items-center justify-between py-4">
-                <label
-                    htmlFor="imgUpload"
-                    className="flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer"
-                >
-                    <input 
-                        type="file"
-                        onChange={(e) => setFile(e.target.files[0])}
-                        className="hidden"
-                        id="imgUpload"
-                        data-max-size="5120"
-                        accept=".jpg, .png, .jpeg"
-                    />
-                    <BiImages />
-                    <span>Image</span>                  
-                </label>
-                <label
-                    htmlFor="videoUpload"
-                    className="flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer"
-                >
-                    <input 
-                        type="file"
-                        onChange={(e) => setFile(e.target.files[0])}
-                        className="hidden"
-                        id="videoUpload"
-                        data-max-size="5120"
-                        accept=".mp4, .wav"
-                    />
-                    <BiSolidVideo />
-                    <span>Video</span>                 
-                </label>
-                <label
-                    htmlFor="vgifUpload"
-                    className="flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer"
-                >
-                    <input 
-                        type="file"
-                        onChange={(e) => setFile(e.target.files[0])}
-                        className="hidden"
-                        id="vgifUpload"
-                        data-max-size="5120"
-                        accept=".gif"
-                    />
-                    <BsFiletypeGif /> 
-                    <span>Gif</span>                   
-                </label>
-                {posting ? (
-                    <Loading />
-                ) : (
-                    <CustomButton 
-                        type="submit"
-                        title="post"
-                        containerStyles="bg-[#0444a4] text-white py-1 px-6 rounded-full font-semibold text-sm"
-                    />
-                )}
+              <label
+                htmlFor="imgUpload"
+                className="flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer"
+              >
+                <input
+                  type="file"
+                  onChange={(e) => setFile(e.target.files[0])}
+                  className="hidden"
+                  id="imgUpload"
+                  data-max-size="5120"
+                  accept=".jpg, .png, .jpeg"
+                />
+                <BiImages />
+                <span>Image</span>
+              </label>
+              <label
+                htmlFor="videoUpload"
+                className="flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer"
+              >
+                <input
+                  type="file"
+                  onChange={(e) => setFile(e.target.files[0])}
+                  className="hidden"
+                  id="videoUpload"
+                  data-max-size="5120"
+                  accept=".mp4, .wav"
+                />
+                <BiSolidVideo />
+                <span>Video</span>
+              </label>
+              <label
+                htmlFor="vgifUpload"
+                className="flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer"
+              >
+                <input
+                  type="file"
+                  onChange={(e) => setFile(e.target.files[0])}
+                  className="hidden"
+                  id="vgifUpload"
+                  data-max-size="5120"
+                  accept=".gif"
+                />
+                <BsFiletypeGif />
+                <span>Gif</span>
+              </label>
+              {posting ? (
+                <Loading />
+              ) : (
+                <CustomButton
+                  type="submit"
+                  title="post"
+                  containerStyles="bg-[#0444a4] text-white py-1 px-6 rounded-full font-semibold text-sm"
+                />
+              )}
             </div>
           </form>
 
+          <div className="block md:hidden">
+            <ProfileCard user={user} />
+          </div>
           {loading ? (
             <Loading />
-        ) : posts?.length > 0 ? (
-          posts?.map((post) => {
-            <PostCard
-            post={post}
-            key={post?._id}
-            user={user}
-            deletePost={handleDelete}
-            likePost={handleLikePost}
-            />
-          })  
-        ) : (
-            <div className='flex w-full h-full items-center justify-center'>
-                <p className='text-lg text-ascent-2'>No Post Available</p>
-              </div>
+          ) : posts?.length > 0 ? (
+            posts?.map((post) => {
+              <PostCard
+                post={post}
+                key={post?._id}
+                user={user}
+                deletePost={handleDelete}
+                likePost={handleLikePost}
+              />;
+            })
+          ) : (
+            <div className="flex w-full h-full items-center justify-center">
+              <p className="text-lg text-ascent-2">No Post Available</p>
+            </div>
           )}
         </div>
         {/* RIGHT */}

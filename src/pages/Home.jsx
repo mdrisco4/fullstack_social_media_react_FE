@@ -88,7 +88,7 @@ const Home = () => {
                 {errMsg?.message}
               </span>
             )}
-            <div className="items-center jutify-between py-4">
+            <div className="flex items-center justify-between py-4">
                 <label
                     htmlFor="imgUpload"
                     className="flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer"

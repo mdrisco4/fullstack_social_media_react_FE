@@ -156,21 +156,21 @@ const Home = () => {
             </div>
           </form>
 
-          <div className="block md:hidden">
+          {/* <div className="block md:hidden">
             <ProfileCard user={user} />
-          </div>
+          </div> */}
           {loading ? (
             <Loading />
           ) : posts?.length > 0 ? (
-            posts?.map((post) => {
+            posts?.map((post) => (
               <PostCard
                 post={post}
                 key={post?._id}
                 user={user}
                 deletePost={handleDelete}
                 likePost={handleLikePost}
-              />;
-            })
+              />
+            ))
           ) : (
             <div className="flex w-full h-full items-center justify-center">
               <p className="text-lg text-ascent-2">No Post Available</p>

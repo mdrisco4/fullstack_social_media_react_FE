@@ -25,7 +25,7 @@ const [showComments, setShowComments] = useState(0);
                 <div className=''>
                     <Link to={"/profile/" + post?.userId?._id}>
                         <p className='font-medium text-lg text-ascent-1'>
-                            {post?.userId.firstName} {post?.userId.lastName}
+                            {/* {post?.userId.firstName} {post?.userId.lastName} */}
                         </p>
                     </Link>
                 </div>

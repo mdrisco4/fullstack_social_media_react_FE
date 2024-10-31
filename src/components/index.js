@@ -4,6 +4,7 @@ import Loading from "./Loading"
 import TopBar from "./TopBar";
 import ProfileCard from "./ProfileCard";
 import FriendsCard from "./FriendsCard";
+import PostCard from "./PostCard";
 
 export {
     TextInput,
@@ -11,5 +12,6 @@ export {
     Loading,
     TopBar,
     ProfileCard,
-    FriendsCard
+    FriendsCard,
+    PostCard
 };

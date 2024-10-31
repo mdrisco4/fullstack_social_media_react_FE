@@ -6,12 +6,14 @@ import {
   FriendsCard,
   CustomButton,
   TextInput,
+  Loading,
+  PostCard
 } from "../components";
-import { friends, requests, suggestions } from "../assets/data";
+import { friends, requests, suggestions, posts } from "../assets/data";
 import { Link } from "react-router-dom";
 import { NoProfile } from "../assets";
 import { apiRequest } from "../utils";
-import { BsFiletypeGif, BsPersonFillAdd } from "react-icons/bs";
+import { BsFiletypeGif, BsPersonFillAdd, BsPostcard } from "react-icons/bs";
 import { BiImages, BiSolidVideo } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 
@@ -20,8 +22,10 @@ const Home = () => {
   const [friendRequest, setFriendRequest] = useState(requests);
   const [suggestedFriends, setSuggestedFriends] = useState(suggestions);
   
-  const [errMsg, setErrMsg] = useState();
+  const [errMsg, setErrMsg] = useState("");
   const [file, setFile] = useState(null);
+  const [posting, setPosting] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -44,6 +48,14 @@ const Home = () => {
       console.log(error);
     }
   };
+
+  const handleDelete = async () => {
+
+  }
+
+  const handleLikePost = async () => {
+    
+  }
 
   return (
     <div className="home w-full px-0 lg:px-10 pb-20 2xl:px-40 bg-bgColor lg:rounded-lg h-screen overflow-hidden">
@@ -134,8 +146,35 @@ const Home = () => {
                     <BsFiletypeGif /> 
                     <span>Gif</span>                   
                 </label>
+                {posting ? (
+                    <Loading />
+                ) : (
+                    <CustomButton 
+                        type="submit"
+                        title="post"
+                        containerStyles="bg-[#0444a4] text-white py-1 px-6 rounded-full font-semibold text-sm"
+                    />
+                )}
             </div>
           </form>
+
+          {loading ? (
+            <Loading />
+        ) : posts?.length > 0 ? (
+          posts?.map((post) => {
+            <PostCard
+            post={post}
+            key={post?._id}
+            user={user}
+            deletePost={handleDelete}
+            likePost={handleLikePost}
+            />
+          })  
+        ) : (
+            <div className='flex w-full h-full items-center justify-center'>
+                <p className='text-lg text-ascent-2'>No Post Available</p>
+              </div>
+          )}
         </div>
         {/* RIGHT */}
         <div className="hidden w-1/4 h-full lg:flex flex-col gap-8 overflow-y-auto">

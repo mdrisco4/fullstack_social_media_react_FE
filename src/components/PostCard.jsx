@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { NoProfile } from '../assets';
+import moment from 'moment';
 
 const PostCard = (post, user, deletePost, likePost) => {
 const [showAll, setShowAll] = useState(0);
@@ -28,11 +29,35 @@ const [showComments, setShowComments] = useState(0);
                     <Link to={"/profile/" + post?.userId?._id}>
                         <p className='font-medium text-lg text-ascent-1'>
                             {post.post?.userId?.firstName} {post.post?.userId?.lastName}
-                            {/* {post[0].userId[0].firstName} */}
                         </p>
                     </Link>
+                    <span className='text-ascent-2'>{post.post?.userId?.location}</span>
                 </div>
+
+                <span className='text-ascent-2'>
+                    {moment(post.post?.createdAt ?? "1900-01-01").fromNow()}
+                </span>
             </div>
+        </div>
+        <div>
+           <p className='text-ascent-2'>
+                {showAll === post.post?._id
+                ? post.post?.description
+                : post.post.description.slice(0, 300)}
+
+                {post.post?.description.length > 300 && 
+                (showAll === post.post._id ? (
+                    <span 
+                        className='text-blue ml-2 font-medium cursor-pointer'
+                        onClick={() => setShowAll(0)}
+                    >Show less</span>
+                ) : (
+                    <span 
+                        className='text-blue ml-2 font-medium cursor-pointer'
+                        onClick={() => setShowAll(post.post?._id)}
+                    >Show more</span>
+                ))}
+            </p> 
         </div>
     </div>
   )

@@ -17,7 +17,8 @@ import { BsFiletypeGif, BsPersonFillAdd, BsPostcard } from "react-icons/bs";
 import { BiImages, BiSolidVideo } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 
-// console.log(posts)
+console.log(posts)
+console.log(posts[0].userId.firstName)
 
 const Home = () => {
   const { user } = useSelector((state) => state.user);
